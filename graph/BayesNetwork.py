@@ -4,8 +4,9 @@ import csv
 import sys
 
 class Network:
-	def __init__(self, networkfilename):
+	def __init__(self, networkfilename, data):
 		self.nodes = {}
+		self.data = data
 
 		try:
 			netfile = file(networkfilename,'r')
@@ -40,43 +41,51 @@ class Network:
 			return
 		else:
 			self.nodes[nodeToIndex].pi.append(nodeFromIndex)
+			self.nodes[nodeFromIndex].children.append(nodeToIndex)
+
+			# Calculate prob of the node given parents
+			# rst_filter_list = [[]]
+			# self.nodes[nodeToIndex].prob = data.count_prob()
+			# Independent or not? This is a problem
 
 class Node:
 	def __init__(self):
 		self.pi = []
+		self.children = []
+		self.prob = []
 
 class Data:
 	def __init__(self):
 		f = open('history.data')
-	    lines = f.readlines()
-	    self.history_matrix = []
-	    for line in lines:
-	        line = line.strip('\n')
-	        feature_list = [int(feature) for feature in line.split(' ')]
-	        self.history_matrix.append(feature_list)
+		lines = f.readlines()
+		self.history_matrix = []
+		for line in lines:
+		    line = line.strip('\n')
+		    feature_list = [int(feature) for feature in line.split(' ')]
+		    self.history_matrix.append(feature_list)
 	
 	def count_feature(self, filter_list):
-	    counter = 0
-	    for feature_list in self.history_matrix:
-	        match = True
-	        for t in filter_list:
-	            index = t[0]
-	            value = t[1]
-	            if feature_list[index] != value:
-	                match = False
-	                break
-	        if match:
-	            counter += 1
-	    return counter
+		counter = 0
+		for feature_list in self.history_matrix:
+		    match = True
+		    for t in filter_list:
+		        index = t[0]
+		        value = t[1]
+		        if feature_list[index] != value:
+		            match = False
+		            break
+		    if match:
+		        counter += 1
+		return counter
 
-	def count_prob(self, filter_list1, filter_list2):
-		filter_list1 += filter_list2
-		return 1.0*self.count_feature(filter_list2)/self.count_feature(filter_list1)
+	def count_prob(self, cond_filter_list, rst_filter_list):
+		rst_filter_list += cond_filter_list
+		return 1.0*self.count_feature(rst_filter_list)/self.count_feature(cond_filter_list)
 
 if __name__ == '__main__':
-	net = Network('NetworkData')
-
 	data = Data()
+	net = Network('NetworkData', data)
+
 	# for key in net.nodes.keys():
 	# 	print key, net.nodes[key].pi
 

@@ -69,6 +69,9 @@ class Data:
 	            counter += 1
 	    return counter
 
+	def count_prob(self, filter_list1, filter_list2):
+		return 1.0*self.count_feature(filter_list1)/self.count_feature(filter_list2)
+
 if __name__ == '__main__':
 	net = Network('NetworkData')
 

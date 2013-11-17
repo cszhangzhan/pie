@@ -1,4 +1,4 @@
-# Backend part of DEMO for entrepreneurship class
+# Backend DEMO for entrepreneurship class
 
 ***Features***
 

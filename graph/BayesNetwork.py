@@ -8,6 +8,7 @@ class Network:
 	def __init__(self, networkfilename, data):
 		self.nodes = {}
 		self.data = data
+		self.StartTime = time.time()
 
 		try:
 			netfile = file(networkfilename,'r')
@@ -77,8 +78,8 @@ class Network:
 	def getCareNodes(self):
 		return self.careNodes
 
-	def getProb(self, nodeIndex, nodeValue=1):
-		StartTime = 0
+	def getProb(self, rstNodeIndex, rstNodeValue=1):
+		self.StartTime = 0
 		CurrTime = time.time()
 		duration = CurrTime - StartTime
 
@@ -91,9 +92,10 @@ class Network:
 		# 		cumuTime += 
 		cond_filter_list = []
 		cond_all_filter_list = []
-		rst_filter_list = [(nodeIndex, nodeValue)]
+		rst_filter_list = [(rstNodeIndex, rstNodeValue)]
 		for (nodeIndex, node) in self.nodes.items():
-			cond_all_filter_list.append((nodeIndex, 1))
+			if node.startTime <= self.nodes[rstNodeIndex].startTime:
+				cond_all_filter_list.append((nodeIndex, 1))
 			if node.startTime <= duration:
 				cond_filter_list.append((nodeIndex, 1))
 				# We only consider 0 or 1
@@ -105,6 +107,13 @@ class Network:
 		return (self.data.countProb(cond_filter_list, rst_filter_list), \
 			self.data.countProb(cond_all_filter_list, rst_filter_list))
 
+	def setStartTime(self, timeOffset):
+		# dict: nodeIndex:startTime
+		self.StartTime = 0
+		for (nodeIndex, offset) in timeOffset:
+			self.nodes[nodeIndex].startTime = offset
+	def getStartTime():
+		return time.localtime(self.StartTime)
 
 class Node:
 	def __init__(self, startTime=(), title='nil'):

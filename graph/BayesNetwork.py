@@ -81,7 +81,7 @@ class Network:
 	def getProb(self, rstNodeIndex, rstNodeValue=1):
 		self.StartTime = 0
 		CurrTime = time.time()
-		duration = CurrTime - StartTime
+		duration = CurrTime - self.StartTime
 
 		duration = 0
 
@@ -112,7 +112,7 @@ class Network:
 		self.StartTime = 0
 		for (nodeIndex, offset) in timeOffset:
 			self.nodes[nodeIndex].startTime = offset
-	def getStartTime():
+	def getStartTime(self):
 		return time.localtime(self.StartTime)
 
 class Node:
@@ -165,6 +165,7 @@ if __name__ == '__main__':
 
 	#time.sleep(5)
 	print net.getProb(6)
+	print net.getStartTime()
 	# print time.time()
 	# time.sleep(1)
 	# print time.time()

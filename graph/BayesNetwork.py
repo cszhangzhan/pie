@@ -73,6 +73,10 @@ class Network:
 			# Independent or not? This is a problem
 	def getStartNodes(self):
 		return self.startNodes
+		
+	def getCareNodes(self):
+		return self.careNodes
+
 	def getProb(self, nodeIndex, nodeValue=1):
 		StartTime = 0
 		CurrTime = time.time()

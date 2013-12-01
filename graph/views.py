@@ -7,3 +7,11 @@ def index(request):
     response_data['message'] = 'You messed up'
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
+def getTopNewsId(request):
+	pass
+
+def getGraph(request):
+	pass
+
+def getPossibility(request):
+	pass

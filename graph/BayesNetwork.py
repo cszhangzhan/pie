@@ -3,6 +3,7 @@
 
 import sys
 import time
+import os
 
 class Network:
 	def __init__(self, networkfilename, data):
@@ -109,11 +110,11 @@ class Network:
 
 	def setStartTime(self, timeOffset):
 		# dict: nodeIndex:startTime
-		self.StartTime = 0
-		for (nodeIndex, offset) in timeOffset:
-			self.nodes[nodeIndex].startTime = offset
+		self.StartTime = time.time()
+		for nodeIndex in timeOffset:
+			self.nodes[nodeIndex].startTime = timeOffset[nodeIndex]
 	def getStartTime(self):
-		return time.localtime(self.StartTime)
+		return self.StartTime
 
 class Node:
 	def __init__(self, startTime=(), title='nil'):
@@ -125,7 +126,9 @@ class Node:
 
 class Data:
 	def __init__(self):
-		f = open('history.data')
+		module_dir = os.path.dirname(__file__)  # get current directory
+		file_path = os.path.join(module_dir, 'history.data')
+		f = open(file_path)
 		lines = f.readlines()
 		self.history_matrix = []
 		for line in lines:
@@ -161,7 +164,9 @@ if __name__ == '__main__':
 	data = Data()
 	# print data.countFeature([(1,1),(2,1),(3,1)])
 	# print data.countFeature([(1,1),(2,1),(3,1),(6,1)])
-	net = Network('NetworkData', data)
+	module_dir = os.path.dirname(__file__)  # get current directory
+	file_path = os.path.join(module_dir, 'NetworkData')
+	net = Network(file_path, data)
 
 	#time.sleep(5)
 	print net.getProb(6)

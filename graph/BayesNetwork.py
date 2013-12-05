@@ -31,7 +31,7 @@ class Network:
 			elif (int(nodeIndex) == 5):
 				self.addNode(int(nodeIndex),[38.907231,-77.036464],"http://action.lowpayisnotok.org/page/-/200X182Worker.jpg","Tell fast food chains: Let the workers strike for their rights!")
 			elif (int(nodeIndex) == 6):
-				self.addNode(int(nodeIndex),[38.907231,-77.036464],"","Raising the Minimum Wage is Good for the Economy")
+				self.addNode(int(nodeIndex),[38.907231,-77.036464],"http://www.ibew.org/articles/13daily/1307/Images/minimumwage_345.jpg","Raising the Minimum Wage is Good for the Economy")
 
 		while True:
 			line = netfile.readline()

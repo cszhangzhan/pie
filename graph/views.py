@@ -2,6 +2,7 @@ from django.http import HttpResponse
 import json
 from BayesNetwork import *
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.staticfiles.views import serve
 
 
 # This is really bad, I don't want to do it this way!
@@ -11,10 +12,7 @@ data = Data()
 net = Network(file_path, data)
 
 def index(request):
-    response_data = {}
-    response_data['result'] = 'failed'
-    response_data['message'] = 'You messed up'
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    return serve(request, 'index.html')
 
 def get_topnews_id(request):
     top_news_list = net.getStartNodes()

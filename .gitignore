@@ -1,7 +1,7 @@
 # Yeoman Generated Files #
 ##########################
 node_modules
-dist
+graph/static
 .tmp
 .sass-cache
 app/bower_components

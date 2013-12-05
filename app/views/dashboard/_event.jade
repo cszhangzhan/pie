@@ -1,0 +1,4 @@
+li(ng-repeat="event in events | filter:{ topNews: true }")
+  .event(ng-click='eventClick(event)')
+    img.th(src='http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2012/11/21/1353515675345/Students-protest-in-centr-011.jpg')
+    h6.subheader {{event.title}}

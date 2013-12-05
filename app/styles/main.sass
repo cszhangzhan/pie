@@ -1,0 +1,243 @@
+// Custom Variables
+$background-dark: #303233
+$background-medium: #66757F
+$background-light: #f8f8f8
+
+$accent-green: #bfe600
+$accent-blue: #00D6DD
+
+@import "compass/css3"
+@import "compass/css3/user-interface"
+@import "vendor/foundation/app"
+@import "vendor/ionicons/ionicons"
+
+@import "mixins"
+@import "animations"
+
+body
+  background: #fff
+
+.modal
+  position: absolute
+  top: 0
+  z-index: 9999
+  width: 100%
+  margin-top: 5%
+
+  .darken
+    background: rgba(0,0,0,0.9)
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 101
+    width: 100%
+    height: 100%
+
+  $modal-height: 650px
+  .modal-content
+    background: $background-light
+    position: absolute
+    z-index: 102
+    top: 12.5%
+    left: 12.5%
+    height: $modal-height
+    width: 75%
+
+    $modal-label-height: 40px
+    .modal-label
+      position: absolute
+      top: -10px
+      left: -10px
+      z-index: 2
+      background: $accent-blue
+      height: $modal-label-height
+      width: 165px
+
+      p
+        line-height: $modal-label-height
+        font-size: 18px
+        color: white
+        font-weight: bold
+        text-align: center
+        -webkit-font-smoothing: antialiased
+
+    .news-info, .graph-info
+      height: $modal-height
+
+      &.news-info
+        padding: 0
+        padding-top: $modal-label-height + 25px
+        background: $background-dark
+
+        .secondary-nav
+          h4
+            text-align: center
+
+        ul.tweets
+          padding: 5px
+          padding-top: 25px
+          margin: 0
+          list-style: none
+
+          li
+            position: relative
+            margin: 0 10px
+            padding: 10px 15px
+            background: $background-light
+            border-radius: 5px
+
+            &:before
+              content: ''
+              position: absolute
+              left: -10px
+              bottom: 10px
+              width: 0px
+              height: 0px
+              border-style: solid
+              border-width: 10px 15px 10px 0
+              border-color: transparent $background-light transparent transparent
+
+            small
+              color: darken($background-light, 20%)
+
+      &.graph-info
+
+        graph
+          height: 0
+
+          svg 
+            display: block
+            cursor: default
+            @include user-select(none)
+
+.node
+  stroke: $background-medium
+  stroke-width: 1.5px
+
+  text
+    stroke: none
+    pointer-events: none
+    font: 10px sans-serif
+
+.link
+  stroke-width: 1.5
+  stroke: #000
+
+  &.active
+    stroke: red
+
+h1,h2,h3,h4,h5,h6
+  -webkit-font-smoothing: antialiased
+
+  &.negative
+    color: #fff !important
+
+  &.subheader
+    &.negative
+      color: darken(#fff, 30%) !important
+
+.header
+  box-sizing: content-box
+  box-shadow: 0px 1px 0.5em #dbdbdb
+  border-bottom: 4px solid darken($background-dark,4%)
+  opacity: .95
+
+  .top-bar
+
+    .name
+      background: $accent-green
+      height: 64px
+
+      a
+        -webkit-font-smoothing: antialiased
+
+    section
+      ul.left
+        i
+          font-size: 30px
+          vertical-align: middle
+
+      ul.right
+        li.has-form
+          padding-top: 10px
+
+.secondary-nav
+  position: relative
+  background: $background-light
+  border-bottom: 1px solid darken($background-light, 10%)
+  border-top: 1px solid darken($background-light, 10%)
+  padding: 6px
+
+  &:after
+    content: ''
+    position: absolute
+    z-index: 2
+    @include calc(left, "50% - 20px")
+    top: 100%
+    width: 0px
+    height: 0px
+    border-style: solid
+    border-width: 20px 20px 0 20px
+    border-color: $background-light transparent transparent transparent
+
+  &:before
+    content: ''
+    position: absolute
+    z-index: 2
+    @include calc(left, "50% - 21px")
+    top: 100%
+    width: 0px
+    height: 0px
+    border-style: solid
+    border-width: 21px 21px 0 21px
+    border-color: darken($background-light, 10%) transparent transparent transparent
+
+  h3
+    margin: 0 10px
+
+  ul
+    li
+      margin: 0 60px
+
+      &:first-child
+        margin-left: 35px
+
+      a
+        font-weight: bold
+        font-size: 12px
+        -webkit-font-smoothing: antialiased
+
+.map
+  width: 100%
+  height: 350px
+
+.top-news
+  height: 100%
+  padding: 5px 20px
+
+  hr
+    margin-top: .25rem
+
+.portfolio
+  padding: 20px
+
+  .company
+    position: relative
+    background: $background-light
+    border: 1px solid darken($background-light, 10%)
+    border-radius: 2px
+    padding: 10px
+
+    .logo
+
+      &:after
+        content: ''
+        position: absolute
+        top: -10px
+        right: -10px
+        @include calc(height, "100% + 20px ")
+        border-right: 1px solid darken($background-light, 10%)
+
+
+      h6
+        text-align: center

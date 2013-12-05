@@ -1,0 +1,66 @@
+<div class="secondary-nav">
+  <ul class="inline-list">
+    <li><a>LOREM</a></li>
+    <li><a>IPSUM</a></li>
+    <li><a>DOLOR</a></li>
+  </ul>
+</div>
+<div class="row">
+  <div class="large-6 columns">
+    <div class="map"></div>
+  </div>
+  <div class="large-6 columns">
+    <div class="top-news">
+      <h4>TOP EVENTS</h4>
+      <hr>
+      <div class="events">
+        <ul class="small-block-grid-3">
+          <li ng-repeat="event in events | filter:{ topNews: true }">
+            <div ng-click="eventClick(event)" class="event"><img src="http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2012/11/21/1353515675345/Students-protest-in-centr-011.jpg" class="th">
+              <h6 class="subheader">{{event.title}}</h6>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="secondary-nav">
+  <h3>PORTFOLIO</h3>
+</div>
+<div class="portfolio">
+  <div class="companies small-block-grid-3">
+    <li class="company">
+      <div class="row">
+        <div class="logo large-2 columns"><img src="http://www.omgchrome.com/wp-content/uploads/2012/08/favicon.png" width="70px">
+          <h6>Google</h6>
+        </div>
+        <div class="large-10 columns"></div>
+      </div>
+    </li>
+  </div>
+</div>
+<div ng-show="isModalOpen" class="modal">
+  <div ng-click="isModalOpen = false" class="darken"></div>
+  <div class="modal-content">
+    <div ng-click="log(item)" class="modal-label">
+      <p>{{events.findWhere({selected:true}).title}}</p>
+    </div>
+    <div class="row">
+      <div class="news-info large-4 columns">
+        <div class="secondary-nav">
+          <h4>#CHATTER</h4>
+        </div>
+        <ul class="tweets">
+          <li class="tweet">
+            <p>Lorem ipsum dolor sit amet! #likeomg</p><small>Two Hours Ago</small>
+          </li>
+        </ul>
+      </div>
+      <div class="graph-info large-8 columns">
+        <graph graph-nodes="events" graph-links="links"></graph>
+        <timelime id="stock-history"></timelime>
+      </div>
+    </div>
+  </div>
+</div>

@@ -17,7 +17,7 @@ def index(request):
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 def get_topnews_id(request):
-    top_news_list = net.getCareNodes()
+    top_news_list = net.getStartNodes()
     return HttpResponse(json.dumps(top_news_list), content_type="application/json")
 
 def get_graph(request):

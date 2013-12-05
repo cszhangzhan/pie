@@ -28,7 +28,7 @@ def get_graph(request):
     initial_time = net.getStartTime()
     for node_id in node_dict:
         node = node_dict[node_id]
-        graph_info['nodes'][node_id] = {'child': node.children, 'title': node.title, 'timestamp': initial_time + node.startTime}
+        graph_info['nodes'][node_id] = {'child': node.children, 'title': node.title, 'timestamp': 1000 * (initial_time + node.startTime)}
     return HttpResponse(json.dumps(graph_info), content_type="application/json")
 
 @csrf_exempt

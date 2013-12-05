@@ -10,4 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^graph/', include('graph.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    (r'^fonts/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/Users/paul/Documents/Code/pie/graph/static/fonts'}),
 )

@@ -9,4 +9,5 @@ urlpatterns = patterns('',
         url(r'^set_topnews_time$', views.set_topnews_time),
         (r'^scripts/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/Users/paul/Documents/Code/pie/graph/static/scripts'}),
         (r'^styles/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/Users/paul/Documents/Code/pie/graph/static/styles'}),
+        (r'^views/dashboard/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/Users/paul/Documents/Code/pie/graph/static/views/dashboard'}),
 )

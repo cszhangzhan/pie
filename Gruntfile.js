@@ -15,7 +15,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      dist: 'graph/static'
     },
     watch: {
       coffee: {
@@ -174,6 +174,7 @@ module.exports = function (grunt) {
     },
     useminPrepare: {
       html: '.tmp/index.html',
+      css: '.tmp/index.html',
       options: {
         dest: '<%= yeoman.dist %>'
       }
@@ -351,6 +352,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'htmlmin',
     'concat',
+    'cssmin',
     'ngmin',
     'copy:dist',
     'uglify',

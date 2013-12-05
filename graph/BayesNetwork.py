@@ -20,7 +20,18 @@ class Network:
 
 		nodesIndex = netfile.readline().split(',')
 		for nodeIndex in nodesIndex:
-			self.addNode(int(nodeIndex))
+			if (int(nodeIndex) == 1):
+				self.addNode(int(nodeIndex),[40.705556,-74.009722],"http://i2.cdn.turner.com/money/dam/assets/121129071507-mcdonalds-strike-employee-monster.jpg","McDona’s, KFC, Burger King workers protest in NYC,")
+			elif (int(nodeIndex) == 2):
+				self.addNode(int(nodeIndex),[41.878114,-87.629798],"http://i2.cdn.turner.com/money/dam/assets/130522041702-fast-food-retail-protest-eddie-guzman-340xa.jpg", "My protest paid off: Fast-food workers speak out")
+			elif (int(nodeIndex) == 3):
+				self.addNode(int(nodeIndex),[27.664827,-81.515754],"http://i2.cdn.turner.com/money/dam/assets/130829112917-fast-food-strike-620xa.jpg","Wave of fast food strikes hits 60 cities")
+			elif (int(nodeIndex) == 4):
+				self.addNode(int(nodeIndex),[40.058324,-74.405661],"http://i2.cdn.turner.com/money/dam/assets/131204115025-n-fast-food-employee-profile-jobs-00013016-620x348.jpg","Fresh Fast food strikes planned for Thursday")
+			elif (int(nodeIndex) == 5):
+				self.addNode(int(nodeIndex),[38.907231,-77.036464],"http://action.lowpayisnotok.org/page/-/200X182Worker.jpg","Tell fast food chains: Let the workers strike for their rights!")
+			elif (int(nodeIndex) == 6):
+				self.addNode(int(nodeIndex),[38.907231,-77.036464],"","Raising the Minimum Wage is Good for the Economy")
 
 		while True:
 			line = netfile.readline()
@@ -52,9 +63,9 @@ class Network:
 		# for node in self.nodes.itervalues():
 		# 	print node.startTime
 
-	def addNode(self, nodeIndex):
+	def addNode(self, nodeIndex, geoLocation, imageURL, title):
 		if not self.nodes.has_key(nodeIndex):
-			self.nodes[nodeIndex] = Node()
+			self.nodes[nodeIndex] = Node(geoLocation, imageURL, title)
 		else:
 			print "NodeIndex '%i' already exists!" % nodeIndex
 	def addArrow(self, nodeFromIndex, nodeToIndex, lineDuration):
@@ -117,12 +128,14 @@ class Network:
 		return self.StartTime
 
 class Node:
-	def __init__(self, startTime=(), title='nil'):
+	def __init__(self, geoLocation, imageURL, title='nil', startTime=()):
 		# (): inf in Python
 		self.pi = []
 		self.children = []
 		self.title = title
 		self.startTime = startTime
+		self.geoLocation = geoLocation
+		self.imageURL = imageURL
 
 class Data:
 	def __init__(self):

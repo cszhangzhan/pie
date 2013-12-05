@@ -91,11 +91,11 @@ class Network:
 		return self.careNodes
 
 	def getProb(self, rstNodeIndex, rstNodeValue=1):
-		self.StartTime = 0
+		# self.StartTime = 0
 		CurrTime = time.time()
 		duration = CurrTime - self.StartTime
 
-		duration = 0
+		# duration = 6
 
 		# for startNodeIndex in self.startNodes:
 		# 	cumuTime = self.nodes[startNodeIndex].startTime
@@ -183,7 +183,7 @@ if __name__ == '__main__':
 
 	#time.sleep(5)
 	print net.getProb(6)
-	print net.getStartTime()
+	# print net.getStartTime()
 	# print time.time()
 	# time.sleep(1)
 	# print time.time()

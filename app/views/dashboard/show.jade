@@ -1,11 +1,11 @@
 .secondary-nav
   ul.inline-list
     li
-      a LOREM
+      a TOP
     li
-      a IPSUM
+      a PORTFOLIO
     li
-      a DOLOR
+      a RECENT
 .row
   .large-6.columns
     include _map
@@ -14,21 +14,44 @@
 .secondary-nav
   h3 PORTFOLIO
 include _portfolio
+.secondary-nav
+  h3 RECENT
+.recent
+  ul.small-block-grid-4
+    li(ng-repeat="event in filteredEvents")
+      .event(ng-click='eventClick(event)')
+        .th(style='background:url("{{event.imageURL}}");background-size:cover;width:100%;height:200px')
+          p {{event.title}}
+          small {{event.timestamp.toLocaleString()}}
 
 
-.modal(ng-show="isModalOpen")
-  .darken(ng-click="isModalOpen = false")
+.modal(ng-show='isModalOpen')
+  .darken(ng-click='isModalOpen = false')
   .modal-content
-    .modal-label(ng-click="log(item)")
+    .modal-label
       p {{events.findWhere({selected:true}).title}}
     .row
       .news-info.large-4.columns
         .secondary-nav
           h4 #CHATTER
         ul.tweets
-          li.tweet
-            p Lorem ipsum dolor sit amet! #likeomg
-            small Two Hours Ago
+          li.tweet(ng-repeat='tweet in tweets')
+            p {{tweet.text}}
+            small {{tweet.created_at}}
       .graph-info.large-8.columns
-        graph(graph-nodes='events', graph-links="links")
-        timelime#stock-history
+        .probability
+          h6 Predictions
+          span(ng-hide='timeDiff(true) < 0') Starbucks within {{timeDiff(true)}} seconds:
+          span(ng-show='timeDiff(true) < 0') Starbucks (Currently Occuring):
+          .container
+            span(ng-hide='sbProb < .5') {{(sbProb * 100).toFixed(2)}}%
+            span(ng-show='sbProb < .5') {{((1-sbProb) * 100).toFixed(2)}}%
+            icon(ng-class="{'ion-arrow-up-b':sbProb > .5,'ion-arrow-down-b': sbProb < .5}")
+          span(ng-hide='timeDiff() < 0') McDonald's within {{timeDiff()}} seconds:
+          span(ng-show='timeDiff() < 0') McDonald's (Currently Occuring):
+          .container
+            span(ng-hide='mcProb < .5') {{(mcProb * 100).toFixed(2)}}%
+            span(ng-show='mcProb < .5') {{((1-mcProb) * 100).toFixed(2)}}%
+            icon(ng-class="{'ion-arrow-up-b':mcProb > .5,'ion-arrow-down-b': mcProb < .5}")
+        graph(graph-nodes='filteredEvents', graph-links='filteredLinks')
+        .chart(chart-data='getChartData()', chart-title='MCD')

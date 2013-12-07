@@ -1,4 +1,5 @@
-li(ng-repeat="event in events | filter:{ topNews: true }")
+li(ng-repeat="event in filteredEvents | limitTo:3")
   .event(ng-click='eventClick(event)')
-    img.th(src='http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2012/11/21/1353515675345/Students-protest-in-centr-011.jpg')
-    h6.subheader {{event.title}}
+    .th(style='background:url("{{event.imageURL}}");background-size:cover;width:100%;height:175px')
+      p {{event.title}}
+      small {{event.timestamp.toLocaleString()}}

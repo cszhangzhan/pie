@@ -43,12 +43,17 @@ html.no-js
     script(src='bower_components/angular-route/angular-route.js')
     script(src='bower_components/foundation/js/foundation.js')
     script(src='bower_components/d3/d3.js')
+    script(src='bower_components/oauth.io/oauth.js')
     // endbuild
     script(src='//api.tiles.mapbox.com/mapbox.js/v1.5.1/mapbox.js')
+    script(src='http://code.highcharts.com/stock/highstock.js')
+    script(src='http://code.highcharts.com/stock/modules/exporting.js')
     // build:js({.tmp,app}) scripts/scripts.js
     script(src='scripts/extends.js')
     script(src='scripts/app.js')
     script(src='scripts/models/EventModel.js')
+    script(src='scripts/services/EventService.js')
+    script(src='scripts/services/StockService.js')
     script(src='scripts/controllers/DashboardController.js')
     script(src='scripts/shared/directives.js')
     // endbuild

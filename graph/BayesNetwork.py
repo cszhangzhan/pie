@@ -21,17 +21,17 @@ class Network:
 		nodesIndex = netfile.readline().split(',')
 		for nodeIndex in nodesIndex:
 			if (int(nodeIndex) == 1):
-				self.addNode(int(nodeIndex),[40.705556,-74.009722],"http://i2.cdn.turner.com/money/dam/assets/121129071507-mcdonalds-strike-employee-monster.jpg","McDona’s, KFC, Burger King workers protest in NYC,")
+				self.addNode(int(nodeIndex),[40.705556,-74.009722],"http://i2.cdn.turner.com/money/dam/assets/121129071507-mcdonalds-strike-employee-monster.jpg","McDonalds’s, KFC, Burger King workers protest in NYC")
 			elif (int(nodeIndex) == 2):
-				self.addNode(int(nodeIndex),[41.878114,-87.629798],"http://i2.cdn.turner.com/money/dam/assets/130522041702-fast-food-retail-protest-eddie-guzman-340xa.jpg", "My protest paid off: Fast-food workers speak out")
+				self.addNode(int(nodeIndex),[41.878114,-87.629798],"http://i2.cdn.turner.com/money/dam/assets/130522041702-fast-food-retail-protest-eddie-guzman-340xa.jpg", "My Protest Paid Off: Fast-food Workers Speak Out")
 			elif (int(nodeIndex) == 3):
-				self.addNode(int(nodeIndex),[27.664827,-81.515754],"http://i2.cdn.turner.com/money/dam/assets/130829112917-fast-food-strike-620xa.jpg","Wave of fast food strikes hits 60 cities")
+				self.addNode(int(nodeIndex),[27.664827,-81.515754],"http://i2.cdn.turner.com/money/dam/assets/130829112917-fast-food-strike-620xa.jpg","Wave of Fast Food Strikes Hits 60 Cities")
 			elif (int(nodeIndex) == 4):
-				self.addNode(int(nodeIndex),[40.058324,-74.405661],"http://i2.cdn.turner.com/money/dam/assets/131204115025-n-fast-food-employee-profile-jobs-00013016-620x348.jpg","Fresh Fast food strikes planned for Thursday")
+				self.addNode(int(nodeIndex),[40.058324,-74.405661],"http://i2.cdn.turner.com/money/dam/assets/131204115025-n-fast-food-employee-profile-jobs-00013016-620x348.jpg","Starbucks Supplier Expresses Worry Over US Food Industry Strikes")
 			elif (int(nodeIndex) == 5):
-				self.addNode(int(nodeIndex),[38.907231,-77.036464],"http://action.lowpayisnotok.org/page/-/200X182Worker.jpg","Tell fast food chains: Let the workers strike for their rights!")
+				self.addNode(int(nodeIndex),[38.907231,-77.036464],"http://action.lowpayisnotok.org/page/-/200X182Worker.jpg","Tell Fast Food Chains: Let the Workers Strike for their Rights!")
 			elif (int(nodeIndex) == 6):
-				self.addNode(int(nodeIndex),[38.907231,-77.036464],"http://www.ibew.org/articles/13daily/1307/Images/minimumwage_345.jpg","Raising the Minimum Wage is Good for the Economy")
+				self.addNode(int(nodeIndex),[38.907231,-77.036464],"http://www.ibew.org/articles/13daily/1307/Images/minimumwage_345.jpg","Talks to Begin on Raising the US Minimum Wage")
 
 		while True:
 			line = netfile.readline()

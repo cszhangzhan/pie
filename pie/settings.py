@@ -56,6 +56,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'pie.middleware.XsSharing'
 )
 
 ROOT_URLCONF = 'pie.urls'

@@ -20,13 +20,25 @@ def get_topnews_id(request):
 
 def get_graph(request):
     graph_info = {}
-    graph_info['top_news_id'] = net.getCareNodes()
-    graph_info['nodes'] = {}
+    graph_info['nodes'] = []
+    graph_info['links'] = []
     node_dict = net.nodes
     initial_time = net.getStartTime()
     for node_id in node_dict:
         node = node_dict[node_id]
-        graph_info['nodes'][node_id] = {'child': node.children, 'title': node.title, 'timestamp': 1000 * (initial_time + node.startTime)}
+
+        isResult = False
+        if not node.children:
+            isResult = True
+
+        isStart = False
+        if not node.pi:
+            isStart = True
+
+        graph_info['nodes'].append({'id': node_id, 'title': node.title, 'imageURL': node.imageURL, 'location': node.geoLocation, 'timestamp': 1000 * (initial_time + node.startTime), 'isResult': isResult, 'isStart':isStart})
+
+        for child in node.children:
+            graph_info['links'].append({'source': node_id, 'target': child[0], 'propagation': child[1]})
     return HttpResponse(json.dumps(graph_info), content_type="application/json")
 
 @csrf_exempt

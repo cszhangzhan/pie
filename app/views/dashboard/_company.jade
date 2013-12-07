@@ -1,6 +1,33 @@
-li.company
+li.company(style="margin-right:1%;")
   .row
-    .logo.large-2.columns
+    .logo.large-2.columns(ng-click='reset()')
         img(src='http://www.omgchrome.com/wp-content/uploads/2012/08/favicon.png', width='70px')
         h6 Google
-    .large-10.columns
+    .large-1.columns.divider
+    .large-9.columns.events
+li.company(style="margin-left:1%;")
+  .row
+    .logo.large-2.columns
+        img(src='http://consumebrands.com/wp-content/uploads/2013/05/mcdonalds-logo-1.png', width='70px')
+        h6 McDonalds
+    .large-1.columns.divider
+    .large-9.columns.events
+      ul.small-block-grid-2
+        li(ng-repeat="event in filteredEvents | filter:affectsMcDonalds")
+          .event(ng-click='eventClick(event)')
+            .th(style='background:url("{{event.imageURL}}");background-size:cover;width:100%;height:175px')
+              p {{event.title}}
+              small {{event.timestamp.toLocaleString()}}
+li.company(style="margin-right:1%;margin-top:1%")
+  .row
+    .logo.large-2.columns
+        img(src='http://www.mninstitute.com/storage/Starbucks_logo_2011.png?__SQUARESPACE_CACHEVERSION=1320805067644', width='70px')
+        h6 Starbucks
+    .large-1.columns.divider
+    .large-9.columns.events
+      ul.small-block-grid-2
+        li(ng-repeat="event in filteredEvents | filter:affectsStarbucks")
+          .event(ng-click='eventClick(event)')
+            .th(style='background:url("{{event.imageURL}}");background-size:cover;width:100%;height:175px')
+              p {{event.title}}
+              small {{event.timestamp.toLocaleString()}}

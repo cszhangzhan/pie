@@ -1,87 +1,82 @@
 'use strict'
 
-app = angular.module 'controllers', []
+app = angular.module('controllers', ['eventService', 'stockService'])
 
 app.controller 'DashboardCtrl',
   class DashboardCtrl
-    @$inject: ['$scope'] 
+    @$inject: ['$scope', '$interval', '$http', 'EventService', 'StockService'] 
 
-    constructor: (@scope) ->
+    constructor: (@scope, @interval, @http, @EventService, @StockService) ->
       angular.extend @scope,
         eventClick: @eventClick
+        eventsBeforeNow: @eventsBeforeNow
+        linkBeforeNow: @linkBeforeNow
+        getChartData: @getChartData
+        affectsMcDonalds: @affectsMcDonalds
+        affectsStarbucks: @affectsStarbucks
+        reset: @reset
+        timeDiff: @timeDiff
 
-      @scope.topNewsIds = [2, 3]
-      @scope.events =
-        [
-          timestamp: 1386111201.270364
-          isResult: false
-          id: 1
-          title: "nil"
-        ,
-          timestamp: 1386111206.270364
-          isResult: false
-          id: 2
-          title: "nil"
-        ,
-          timestamp: 1386111206.270364
-          isResult: false
-          id: 3
-          title: "nil"
-        ,
-          timestamp: 1386111216.270364
-          isResult: true
-          id: 4
-          title: "nil"
-        ,
-          timestamp: 1386111211.270364
-          isResult: false
-          id: 5
-          title: "nil"
-        ,
-          timestamp: 1386111216.270364
-          isResult: true
-          id: 6
-          title: "nil"
-        ]
+      @init()
+      # @interval @init, 5000
 
-      @scope.links =
-        [
-          source: 1
-          target: 2
-          propagation: 5
-        ,
-          source: 1
-          target: 3
-          propagation: 5
-        ,
-          source: 2
-          target: 4
-          propagation: 10
-        ,
-          source: 2
-          target: 6
-          propagation: 10
-        ,
-          source: 3
-          target: 5
-          propagation: 5
-        ,
-          source: 5
-          target: 6
-          propagation: 5
-        ]
+    init: () =>
+      @EventService.query().then (data) =>
+        @scope.events = data.nodes
+        @scope.links = data.links
 
-      for link in @scope.links
-        link.source = @scope.events.indexOf(@scope.events.findWhere(id: link.source))
-        link.target = @scope.events.indexOf(@scope.events.findWhere(id: link.target))
+        for link in @scope.links
+          link.source = @scope.events.indexOf(@scope.events.findWhere(id: link.source))
+          link.target = @scope.events.indexOf(@scope.events.findWhere(id: link.target))
 
-      for node in @scope.events
-        node.timestamp = new Date node.timestamp
-        node.topNews = if @scope.topNewsIds.indexOf(node.id) != -1 then true else false
+        for node in @scope.events
+          node.timestamp = new Date node.timestamp
 
+        @eventsBeforeNow()
+        @linksBeforeNow()
+
+      @EventService.calculate().then (data) =>
+        @scope.mcProb = 1 - data["6"][0]
+        @scope.sbProb = 1 - data["4"][0]
+
+    eventsBeforeNow: () =>
+      @scope.filteredEvents = @scope.events.filter (event) ->
+        return event.timestamp.getTime() <= new Date().getTime()
+
+    linksBeforeNow: () =>
+      @scope.filteredLinks = @scope.links.filter (link) =>
+        if link.target >= @scope.filteredEvents.length or link.source >= @scope.filteredEvents.length
+          return false
+
+        true
 
     eventClick: (event) =>
       for item in @scope.events
         item.selected = false
       event.selected = true
+      @StockService.twitter().then (data) =>
+        @scope.tweets = data
       @scope.isModalOpen = true
+
+    getChartData: () =>
+      @StockService.query()
+
+    affectsMcDonalds: (event) =>
+      event.id != 4
+
+    affectsStarbucks: (event) =>
+      event.id == 1 or event.id == 2
+
+    reset: =>
+      @EventService.reset()
+
+    update: =>
+      @init()
+
+    timeDiff: (sb) =>
+      if @scope.events
+        toFind = if sb then 4 else 6
+        ms = @scope.events.findWhere(id: toFind).timestamp.getTime() - new Date().getTime()
+        sec = Math.round((ms)/1000)
+        return sec
+      
